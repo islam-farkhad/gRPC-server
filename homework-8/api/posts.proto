@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "pkg/posts";
+
+package posts;
+
+service PostService {
+  rpc CreatePost (AddPostRequest) returns (Post) {}
+  rpc GetPostByID (GetPostRequest) returns (GetPostByIDResponse) {}
+  rpc UpdatePost (UpdatePostRequest) returns (Post) {}
+  rpc DeletePost (DeletePostRequest) returns (google.protobuf.Empty) {}
+}
+
+service CommentService {
+  rpc CreateComment (AddCommentRequest) returns (Comment) {}
+}
+
+message Post {
+  int64 id = 1;
+  string content = 2;
+  int64 likes = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message Comment {
+  int64 id = 1;
+  int64 post_id = 2;
+  string content = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message AddPostRequest {
+  string content = 1;
+  int64 likes = 2;
+}
+
+message GetPostRequest {
+  int64 id = 1;
+}
+
+message UpdatePostRequest {
+  int64 id = 1;
+  string content = 2;
+  int64 likes = 3;
+}
+
+message DeletePostRequest {
+  int64 id = 1;
+}
+
+message AddCommentRequest {
+  int64 post_id = 1;
+  string content = 2;
+}
+
+message GetPostByIDResponse {
+  Post post = 1;
+  repeated Comment comments = 2;
+}
