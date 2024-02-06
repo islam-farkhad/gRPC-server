@@ -29,7 +29,4 @@ test-migration-up:
 .PHONY: test-migration-down
 test-migration-down:
 	goose -dir "$(MIGRATION_FOLDER)" postgres "$(POSTGRES_SETUP_TEST)" down
-
-.PHONY: run-unit-tests
-run-unit-tests:
-	go test -v ./internal/...
+	
