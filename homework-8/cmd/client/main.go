@@ -15,7 +15,7 @@ import (
 
 // All service supported methods.
 const (
-	method = CreateComment // Choose method here
+	method = CreatePost // Choose method here
 
 	CreatePost  = "CreatePost"
 	GetPostByID = "GetPostByID"
